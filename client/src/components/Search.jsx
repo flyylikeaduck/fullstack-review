@@ -29,4 +29,4 @@ class Search extends React.Component {
 
 export default Search;
 
-// REMEMBER: always bind this when there's an event handler!
+// PAIN POINT: always bind this when there's an event handler!

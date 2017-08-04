@@ -17,6 +17,8 @@ class App extends React.Component {
     console.log(`${term} was searched`);
     // TODO
 
+    // PAIN POINT: remember how to formulate the AJAX request
+
     $.ajax({
       type: "POST",
       url: "/repos",
@@ -24,6 +26,7 @@ class App extends React.Component {
 
       // success & error only after res.send() from server
       success: function() {
+        // manipulate the state repos
         console.log('success!!')
       },
       error: function(error) {

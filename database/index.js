@@ -4,7 +4,7 @@ mongoose.connect('mongodb://localhost/fetcher');
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!
   id: Number,
-  name: String,
+  title: String,
   owner: String,
   url: String
   // read article about document oriented db
@@ -14,19 +14,32 @@ let repoSchema = mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 // each doc will be a repoSet for each particular repo with properties declared in my schema.
-let consortium = new Repo({ id: 182221276, etc etc })
+// let consortium = new Repo({ id: 182221276, etc etc })
 
 
-let save = (/* TODO */) => {
+
+let save = (repos) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
+  repos.forEach(repoObj => {
+    let repoDoc = new Repo({
+      id: repoObj.id,
+      title: repoObj.name,
+      owner: repoObj.owner.login,
+      url: repoObj.html_url
+    });
 
-  // utilized in index.jsx --> post
+    repoDoc.save(err => {
+      if (err) return console.err(err);
+    });
+  })
 
+  // to avoid duplicate repos: use repos.id
 
 }
 
+// export default
 module.exports.save = save;
 
 // route on frontend, which sends the req to server on that given route
